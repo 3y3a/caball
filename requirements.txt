@@ -1,10 +1,2 @@
 discord.py
-math
-datetime
-time
-os
-requests
-PIL
-io
-random
 sqlite3
