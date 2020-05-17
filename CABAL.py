@@ -98,7 +98,7 @@ async def Запись(ctx, time):
     #cursor.execute(f"insert into Legates values (Null, {legat}, Null, Null) ")
     #conn.commit()
 
-    @cabal.event
+@cabal.event
 async def on_message (message):                                         
     await cabal.process_commands (message)
     mess = message.content.lower()
