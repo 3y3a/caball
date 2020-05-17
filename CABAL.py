@@ -18,8 +18,6 @@ import sqlite3
 conn = sqlite3.connect('Chinook_Sqlite.sqlite')
 cursor = conn.cursor()
 
-token = os.environ.get("BOT_TOKEN")
-
 key_words = ["CABAL", "cabal", "Cabal"]
 
 cabal = commands.Bot(command_prefix= "!")
@@ -144,5 +142,5 @@ async def on_message (message):                                         #???
 
 
 
-
+token = os.environ.get("BOT_TOKEN")
 cabal.run(str(token))
