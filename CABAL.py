@@ -88,15 +88,11 @@ async def Доклад(ctx):
             await ctx.send(f"```{results[i][0]} - {results[i][1]} / {results[i][2]}```")
 
 @cabal.command(pass_context= True)                          #ok
-async def Запись(ctx, time):
-    cursor.execute(f"UPDATE Legates SET time = ('{time}') WHERE id = ('{ctx.author.id}')")
-    #time = cursor.execute(f"SELECT time FROM Legates")
+async def Запись(ctx, tim):
+    cursor.execute(f"UPDATE Legates SET time = ('{tim}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
     time.sleep(2)
     ctx.send(f"Запись сделана")
-    #await ctx.send(f"{ctx.author.id}")
-    #cursor.execute(f"insert into Legates values (Null, {legat}, Null, Null) ")
-    #conn.commit()
 
 @cabal.event
 async def on_message (message):                                         
