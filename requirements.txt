@@ -1,5 +1,4 @@
 discord.py
-aiohttp
 webspkets
 chardet
 math
