@@ -1,0 +1,13 @@
+discord.py
+aiohttp
+webspkets
+chardet
+math
+datetime
+time
+os
+requests
+PIL
+io
+random
+sqlite3
