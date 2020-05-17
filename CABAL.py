@@ -92,7 +92,7 @@ async def Запись(ctx, tim):
     cursor.execute(f"UPDATE Legates SET time = ('{tim}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
     time.sleep(2)
-    ctx.send(f"Запись сделана")
+    await ctx.send(f"```Запись сделана```")
 
 @cabal.event
 async def on_message (message):                                         
