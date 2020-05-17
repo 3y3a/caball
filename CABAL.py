@@ -9,7 +9,6 @@ from datetime import date
 from time import sleep
 import os
 import requests
-from PIL import Image, ImageFont, ImageDraw
 import io
 import time
 from random import randint
@@ -99,36 +98,7 @@ async def Запись(ctx, time):
     #cursor.execute(f"insert into Legates values (Null, {legat}, Null, Null) ")
     #conn.commit()
 
-@cabal.command(pass_context= True)
-async def Досье(ctx, user: discord.User):                   #Ok
-       
-    img = Image.new("RGBA", (400,200), "#808080" )
-    url = str(user.avatar_url) [:-10]
-
-    response = requests.get(url, stream = True)
-    response = Image.open(io.BytesIO(response.content))
-    response = response.convert("RGBA")
-    response = response.resize((100, 100), Image.ANTIALIAS)
-
-    img.paste(response, (15, 15, 115, 115))
-
-    idraw = ImageDraw.Draw(img)
-    name = user.name
-    tag = user.id
-    time = user.created_at.strftime("%Y/%m/%d %H:%M)")
-
-    headline = ImageFont.truetype("arial.ttf", size = 20)
-    undertext = ImageFont.truetype("arial.ttf", size = 12)
-            
-    idraw.text((145, 15), f"{name}", font = headline)
-    idraw.text((145, 50), f"ID: {tag}", font = undertext)
-    idraw.text((145, 70), f"Существует с:{time}", font = undertext) 
-
-    img.save("user_card.png")
-
-    await ctx.send(file = discord.File(fp = "user_card.png"))
-
-@cabal.event
+    @cabal.event
 async def on_message (message):                                         #???
     await cabal.process_commands (message)
     mess = message.content.lower()
