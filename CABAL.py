@@ -99,7 +99,7 @@ async def Запись(ctx, time):
     #conn.commit()
 
     @cabal.event
-async def on_message (message):                                         #???
+async def on_message (message):                                         
     await cabal.process_commands (message)
     mess = message.content.lower()
     if mess in key_words:
