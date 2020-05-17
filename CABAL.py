@@ -43,8 +43,8 @@ async def Справка(ctx):
 async def Время(ctx):
     await ctx.send(f"```Подключаю модуль времени...```")
     time = datetime.now()
-    mtime = timedelta(hours=2)
-    mtime = time - mtime
+    mtime = timedelta(hours=3)
+    mtime = time + mtime
     mtime = mtime.strftime("%H:%M")
     await ctx.send(f" ```Текущее время МСК {mtime} ```")
     
