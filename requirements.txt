@@ -1,6 +1,4 @@
 discord.py
-websokets
-chardet
 math
 datetime
 time
