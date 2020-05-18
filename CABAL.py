@@ -30,7 +30,7 @@ async def on_connect():                                       #Ok
     #activity = discord.Game ("C&C")) 
 
 @cabal.command(pass_context= True)  
-async def пнул(ctx, user: discord.User):
+async def пни(ctx, user: discord.User):
     await ctx.channel.purge(limit = 2)
     await ctx.send(f"{user.mention}")
 
