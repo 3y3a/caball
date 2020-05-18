@@ -31,7 +31,7 @@ async def on_connect():                                       #Ok
 
 @cabal.command(pass_context= True)  
 async def пни(ctx, user: discord.User):
-    await ctx.channel.purge(limit = 2)
+    await ctx.channel.purge(limit = 1)
     await ctx.send(f"{user.mention}")
 
 @cabal.command(pass_context= True)           
