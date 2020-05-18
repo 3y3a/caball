@@ -58,6 +58,7 @@ async def Новый_период(ctx):
     cursor.execute(f"UPDATE Legates SET time = Null")
     cursor.execute(f"UPDATE Legates SET datenow = ('{time}'), datenext = ('{timenext}')")
     conn.commit()
+    await ctx.send(f"{time}")
 
 cursor.execute("SELECT datenow, datenext FROM Legates")
 datedoklad = cursor.fetchall()
