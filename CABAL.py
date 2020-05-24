@@ -75,9 +75,10 @@ async def Вышел(ctx, server, endtime):
     #time2 = time2.strftime("%H:%M")
     time3 = timeinserver[0][0]
     timeend = timeinserver[0][1]
+    timeend1 = datetime.strptime(timeend,"%H:%M")
     time4 = datetime.strptime(time3,"%H:%M")
     #time4 = time4.strftime("%H:%M")
-    timeall = time2 - time4 + timeend
+    timeall = time2 - time4 + timeend1
     cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}')  WHERE id = ('{ctx.author.id}')")
     conn.commit()
     await ctx.send(f"Done.")
