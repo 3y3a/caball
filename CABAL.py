@@ -74,7 +74,7 @@ async def Вышел(ctx, server, endtime):
     time2 = datetime.strptime(endtime,"%H:%M")
     #time2 = time2.strftime("%H:%M")
     time3 = timeinserver[0][0]
-    timeend = timeserver[0][1]
+    timeend = timeinserver[0][1]
     time4 = datetime.strptime(time3,"%H:%M")
     #time4 = time4.strftime("%H:%M")
     timeall = time2 - time4 + timeend
