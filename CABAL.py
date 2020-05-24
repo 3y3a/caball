@@ -69,15 +69,16 @@ async def Зашел(ctx, server, starttime):
 
 @cabal.command(pass_context= True)
 async def Вышел(ctx, server, endtime):
-    cursor.execute(f"SELECT starttime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+    cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
     time2 = datetime.strptime(endtime,"%H:%M")
     #time2 = time2.strftime("%H:%M")
     time3 = timeinserver[0][0]
+    timeend = timeserver[0][1]
     time4 = datetime.strptime(time3,"%H:%M")
     #time4 = time4.strftime("%H:%M")
-    timeall = time2 - time4
-    cursor.execute(f"UPDATE Legates SET time = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+    timeall = time2 - time4 + timeend
+    cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}')  WHERE id = ('{ctx.author.id}')")
     conn.commit()
     await ctx.send(f"Done.")
 
