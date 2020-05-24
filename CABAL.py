@@ -22,7 +22,7 @@ key_words = ["CABAL", "cabal", "Cabal"]
 cabal = commands.Bot(command_prefix= "!")
 
 @cabal.event                                
-async def on_connect():                                       #Ok
+async def on_connect():                                       
     print("Welcome back Commander")
     #channelup = cabal.get_channel(695286021176426536)
     #await channelup.send("``Подключён``")
@@ -34,12 +34,7 @@ async def пни(ctx, user: discord.User):
     await ctx.channel.purge(limit = 1)
     await ctx.send(f"{user.mention}")
 
-@cabal.command(pass_context= True)           
-async def Справка(ctx):
-    author = ctx.message.author
-    await ctx.send(f" {author.mention} Приветствую, я #дополнить# ")
-
-@cabal.command(pass_context= True)                          #Ok
+@cabal.command(pass_context= True)                        
 async def Время(ctx):
     await ctx.send(f"```Подключаю модуль времени...```")
     time = datetime.now()
@@ -55,19 +50,31 @@ async def Новый_период(ctx):
     timenext = time + timenext
     time = time.strftime("%d/%m")
     timenext = timenext.strftime("%d/%m")
-    cursor.execute(f"UPDATE Legates SET time = Null, datenow = Null, datenext = Null ")
     cursor.execute(f"UPDATE Legates SET datenow = ('{time}'), datenext = ('{timenext}')")
+    cursor.execute(f"UPDATE Legates SET time = Null")
     conn.commit()
-    await ctx.send(f"{time}")
 
-cursor.execute("SELECT datenow, datenext FROM Legates")
-datedoklad = cursor.fetchall()
-datenow = datedoklad[0][0]
-datenext = datedoklad[0][1] 
+@cabal.command(pass_context= True)
+async def Зашел(ctx, server, starttime):
+    time1 = datetime.strptime(starttime,"%H:%M")
+    time1 = time1.strftime("%H:%M")
+    cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
+    conn.commit()
+    await ctx.send(f"Done.")
 
-@cabal.command(pass_context= True)                          
-async def Очистка(ctx, amount = 18):
-    await ctx.channel.purge(limit = amount)
+@cabal.command(pass_context= True)
+async def Вышел(ctx, server, endtime):
+    cursor.execute(f"SELECT starttime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+    timeinserver = cursor.fetchall()
+    time2 = datetime.strptime(endtime,"%H:%M")
+    #time2 = time2.strftime("%H:%M")
+    time3 = timeinserver[0][0]
+    time4 = datetime.strptime(time3,"%H:%M")
+    #time4 = time4.strftime("%H:%M")
+    timeall = time2 - time4
+    cursor.execute(f"UPDATE Legates SET time = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+    conn.commit()
+    await ctx.send(f"Done.")
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
@@ -80,21 +87,21 @@ async def Доклад(ctx):
     await ctx.send(f"Запрос личных данных {two}%...")
     time.sleep(1)
     await ctx.send(f"Готово.")
-    cursor.execute("SELECT name, time, norma FROM Legates")
+    cursor.execute("SELECT name, time, norma, datenow, datenext FROM Legates")
     results = cursor.fetchall()
-    await ctx.send(f"***Период: {datenow} - {datenext}***")
+    await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
+    f = open ("test.txt", "w")
     for i in range (len(results)):
         if {results[i][2]} == {results[i][1]}:
-            await ctx.send(f"```{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена)```")
+            #await ctx.send(f"```{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена)```")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
         else:
-            await ctx.send(f"```{results[i][0]} - {results[i][1]} / {results[i][2]}```")
+            #await ctx.send(f"```{results[i][0]} - {results[i][1]} / {results[i][2]}```")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} \n \n")
+    f.close()
+    f = open ("test.txt", "r")
+    await ctx.send(f"```{f.read()}```")
 
-@cabal.command(pass_context= True)                          #ok
-async def Запись(ctx, tim):
-    cursor.execute(f"UPDATE Legates SET time = ('{tim}') WHERE id = ('{ctx.author.id}')")
-    conn.commit()
-    time.sleep(2)
-    await ctx.send(f"```Запись сделана```")
 
 @cabal.event
 async def on_message (message):                                         
