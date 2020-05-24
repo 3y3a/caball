@@ -34,7 +34,7 @@ async def пни(ctx, user: discord.User):
     author = ctx.message.author.id
     if author == 488038345151217719:
         await ctx.send(f"Доступ запрещён")
-     else:
+    else:
         await ctx.channel.purge(limit = 2)
         await ctx.send(f"{user.mention}")
     
