@@ -56,7 +56,7 @@ async def Новый_период(ctx):
     time = time.strftime("%d/%m")
     timenext = timenext.strftime("%d/%m")
     cursor.execute(f"UPDATE Legates SET datenow = ('{time}'), datenext = ('{timenext}')")
-    cursor.execute(f"UPDATE Legates SET time = Null")
+    cursor.execute(f"UPDATE Legates SET time = Null, endtime = ('0:00')")
     conn.commit()
 
 @cabal.command(pass_context= True)
