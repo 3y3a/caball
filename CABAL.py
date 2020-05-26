@@ -65,7 +65,7 @@ async def Зашел(ctx, server, starttime):
     time1 = time1.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
-    await ctx.send(f"Done.")
+    await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
 async def Вышел(ctx, server, endtime):
@@ -82,8 +82,13 @@ async def Вышел(ctx, server, endtime):
     timeall = timeall.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
-    await ctx.send(f"Done.")
+    await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
+@cabal.command(pass_context= True)
+async def Дозапись(ctx, legat, endtime):
+    cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
+    conn.commit()
+    await ctx.send(f"Дозапись Легату {legat} в размере {endtime} сделана.")
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
     one = randint(0, 50)
