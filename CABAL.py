@@ -33,7 +33,7 @@ async def on_connect():
 async def пни(ctx, user: discord.User):
     author = ctx.message.author.id
     if author == 488038345151217719:
-        await ctx.send(f"Доступ запрещён")
+        await ctx.send(f"Доступ pmm запрещён!")
     else:
         await ctx.channel.purge(limit = 2)
         await ctx.send(f"{user.mention}")
@@ -41,12 +41,15 @@ async def пни(ctx, user: discord.User):
 
 @cabal.command(pass_context= True)                        
 async def Время(ctx):
-    await ctx.send(f"```Подключаю модуль времени...```")
-    time = datetime.now()
-    mtime = timedelta(hours=3)
-    mtime = time + mtime
-    mtime = mtime.strftime("%H:%M")
-    await ctx.send(f" ```Текущее время МСК {mtime} ```")
+    if author == 488038345151217719:
+        await ctx.send(f"Доступ pmm запрещён!")
+    else:
+        await ctx.send(f"```Подключаю модуль времени...```")
+        time = datetime.now()
+        mtime = timedelta(hours=3)
+        mtime = time + mtime
+        mtime = mtime.strftime("%H:%M")
+        await ctx.send(f" ```Текущее время МСК {mtime} ```")
     
 @cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
