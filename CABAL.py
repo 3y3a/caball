@@ -41,6 +41,7 @@ async def пни(ctx, user: discord.User):
 
 @cabal.command(pass_context= True)                        
 async def Время(ctx):
+    author = ctx.message.author.id
     if author == 488038345151217719:
         await ctx.send(f"Доступ pmm запрещён!")
     else:
