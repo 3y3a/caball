@@ -31,12 +31,8 @@ async def on_connect():
 
 @cabal.command(pass_context= True)  
 async def пни(ctx, user: discord.User):
-    author = ctx.message.author.id
-    if author == 488038345151217719:
-        await ctx.send(f"Доступ pmm запрещён!")
-    else:
-        await ctx.channel.purge(limit = 2)
-        await ctx.send(f"{user.mention}")
+    await ctx.channel.purge(limit = 1)
+    await ctx.send(f"{user.mention}")
     
 
 @cabal.command(pass_context= True)                        
