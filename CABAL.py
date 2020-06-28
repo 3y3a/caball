@@ -77,6 +77,20 @@ async def on_message (message):
         time.sleep (4)
         await message.author.send(f" ```{message.author.name} - здравствуйте легат, доступ разрешён .```")
     #await message.author.send({message.author.id})
+    
+@cabal.command(pass_context= True)
+@commands.has_permissions(administrator= True)
+async def say(ctx, channel : discord.TextChannel, *args):
+    await ctx.message.delete()
+    if not channel:
+        await ctx.send('забыл канал')
+        return
+    if not args:
+        await ctx.send('забыл текст')
+    text = ''
+    for item in args:
+        text = text + item + ' '
+    await channel.send(text)
 
 
 
