@@ -35,9 +35,10 @@ async def пни(ctx, user: discord.User):
     await ctx.send(f"{user.mention}")
 
 @cabal.command(pass_context= True)
-async def скарманил(ctx, user: discord.User):
+async def скарманил(ctx, user: discord.User, channel: discord.TextChannel):
+    await ctx.message.delete()
     user2 = ctx.message.author
-    await ctx.send(f"{user2} скарманил {user.mention}")
+    await channel.send(f"{user2} скарманил {user.mention}")
 
 @cabal.command(pass_context= True)                        
 async def Время(ctx):
