@@ -33,7 +33,11 @@ async def on_connect():
 async def пни(ctx, user: discord.User):
     await ctx.channel.purge(limit = 1)
     await ctx.send(f"{user.mention}")
-    
+
+@cabal.command(pass_context= True)
+async def скарманил(ctx, user: discord.User):
+    user2 = ctx.message.author
+    await ctx.send(f"{user2} скарманил {user.mention}")
 
 @cabal.command(pass_context= True)                        
 async def Время(ctx):
