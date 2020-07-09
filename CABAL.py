@@ -100,8 +100,9 @@ async def say(ctx, channel : discord.TextChannel, *args):
 @cabal.command(pass_context= True)
 async def test(ctx):
     #channel = channel: discord.TextChannel
-    channel = test-rights: discord.TextChannel
-    await channel.send(f"{123}")
+    channel = test-rights
+    channel: discord.TextChannel
+    await channel.send(f"123")
 
 token = os.environ.get("BOT_TOKEN")
 cabal.run(str(token))
