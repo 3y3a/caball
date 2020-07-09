@@ -97,7 +97,7 @@ async def say(ctx, channel : discord.TextChannel, *args):
         text = text + item + ' '
     await channel.send(text)
 
-@cabal.comand(pass_context= True)
+@cabal.command(pass_context= True)
 async def test(ctx, channel: discord.TextChannel):
     await channel.send(f"{channel}")
 
