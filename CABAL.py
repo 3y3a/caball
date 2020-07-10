@@ -87,15 +87,18 @@ async def on_message (message):
 @commands.has_permissions(administrator= True)
 async def say(ctx, channel : discord.TextChannel, *args):
     await ctx.message.delete()
-    if not channel:
-        await ctx.send('забыл канал')
-        return
-    if not args:
-        await ctx.send('забыл текст')
-    text = ''
-    for item in args:
-        text = text + item + ' '
-    await channel.send(text)
+    if ctx.message.author.id == 370199534183120897:
+        text = ''
+        for item in args:
+            text = text + item + ' '
+        await channel.send(text)
+    elif ctx.message.author.id == 345253518376173570:
+        text = ''
+        for item in args:
+            text = text + item + ' '
+        await channel.send(text)
+    else:
+        await ctx.send(f"Доступ запрещён")
 
 @cabal.command(pass_context= True)
 async def test(ctx):
