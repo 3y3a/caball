@@ -58,7 +58,7 @@ async def Время(ctx):
    mtime = mtime.strftime("%H:%M")
    await ctx.send(f" ```Текущее время МСК {mtime} ```")
     
-@legacy.command(pass_context= True)
+@cabal.command(pass_context= True)
 async def Новый_период(ctx): #OK
     await ctx.message.delete()
     time = date.today()
@@ -71,7 +71,7 @@ async def Новый_период(ctx): #OK
     await ctx.send(f"Начало нового периода {time} - {timenext}")
     conn.commit()
 
-@legacy.command(pass_context= True)
+@cabal.command(pass_context= True)
 async def Зашел(ctx, server, starttime):        #ok
     time1 = datetime.strptime(starttime,"%H:%M")
     time1 = time1.strftime("%H:%M")
@@ -79,7 +79,7 @@ async def Зашел(ctx, server, starttime):        #ok
     conn.commit()
     await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
-@legacy.command(pass_context= True)
+@cabal.command(pass_context= True)
 async def Вышел(ctx, server, endtime):          #ok
     cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
@@ -96,14 +96,14 @@ async def Вышел(ctx, server, endtime):          #ok
     conn.commit()
     await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
-@legacy.command(pass_context= True)
+@cabal.command(pass_context= True)
 async def Дозапись(ctx, legat, endtime):            #ok
     await ctx.message.delete()
     cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
     conn.commit()
     await ctx.send(f"Дозапись Легату {legat} в размере {endtime} сделана.")
 
-@legacy.command(pass_context= True)                          
+@cabal.command(pass_context= True)                          
 async def Доклад(ctx):              #ok
     one = randint(0, 50)
     two = randint(50, 100)
