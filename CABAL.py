@@ -12,7 +12,7 @@ import requests
 import io
 import time
 from random import randint
-import sqlite3
+#import sqlite3
 import pymysql
 
 conn = pymysql.connect(
