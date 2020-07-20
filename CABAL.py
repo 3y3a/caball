@@ -25,8 +25,6 @@ conn = pymysql.connect(
     #cursorclass=pymysql.cursors.DictCursor
 )
 
-cursor = conn.cursor()
-
 key_words = ["CABAL", "cabal", "Cabal"]
 
 cabal = commands.Bot(command_prefix= "!")
@@ -59,7 +57,8 @@ async def Время(ctx):
    await ctx.send(f" ```Текущее время МСК {mtime} ```")
     
 @cabal.command(pass_context= True)
-async def Новый_период(ctx): #OK
+async def Новый_период(ctx): 
+    cursor = conn.cursor()
     await ctx.message.delete()
     time = date.today()
     timenext = timedelta(days = 2)
@@ -70,17 +69,21 @@ async def Новый_период(ctx): #OK
     cursor.execute(f"UPDATE Legates SET time = Null, endtime = ('00:00')")
     await ctx.send(f"Начало нового периода {time} - {timenext}")
     conn.commit()
+    cursor.close
 
 @cabal.command(pass_context= True)
-async def Зашел(ctx, server, starttime):        #ok
+async def Зашел(ctx, server, starttime):        
+    cursor = conn.cursor()
     time1 = datetime.strptime(starttime,"%H:%M")
     time1 = time1.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
+    cursor.close
     await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
-async def Вышел(ctx, server, endtime):          #ok
+async def Вышел(ctx, server, endtime):    
+    cursor = conn.cursor()
     cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
     time2 = datetime.strptime(endtime,"%H:%M")
@@ -94,16 +97,20 @@ async def Вышел(ctx, server, endtime):          #ok
     timeall = timeall.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
     conn.commit()
+    cursor.close
     await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
 @cabal.command(pass_context= True)
-async def Дозапись(ctx, legat, endtime):            #ok
+async def Дозапись(ctx, legat, endtime):
+    cursor = conn.cursor()
     cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
     conn.commit()
+    cursor.close
     await ctx.send(f"Дозапись Легату {legat} в размере {endtime} сделана.")
 
 @cabal.command(pass_context= True)                          
-async def Доклад(ctx):              #ok
+async def Доклад(ctx):
+    cursor = conn.cursor()
     one = randint(0, 50)
     two = randint(50, 100)
     await ctx.send(f"Подготавливаю доклад...")
@@ -125,6 +132,7 @@ async def Доклад(ctx):              #ok
     f.close()
     f = open ("test.txt", "r")
     await ctx.send(f"```{f.read()}```")
+    cursor.close
     
 @cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
