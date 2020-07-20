@@ -98,7 +98,6 @@ async def Вышел(ctx, server, endtime):          #ok
 
 @cabal.command(pass_context= True)
 async def Дозапись(ctx, legat, endtime):            #ok
-    await ctx.message.delete()
     cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
     conn.commit()
     await ctx.send(f"Дозапись Легату {legat} в размере {endtime} сделана.")
