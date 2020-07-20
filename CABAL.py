@@ -13,8 +13,18 @@ import io
 import time
 from random import randint
 import sqlite3
+import pymysql
 
-conn = sqlite3.connect('Chinook_Sqlite.sqlite')
+conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+    #cursorclass=pymysql.cursors.DictCursor
+)
+
 cursor = conn.cursor()
 
 key_words = ["CABAL", "cabal", "Cabal"]
@@ -42,16 +52,80 @@ async def скарманил(ctx, user: discord.User, channel: discord.TextChann
 
 @cabal.command(pass_context= True)                        
 async def Время(ctx):
-    author = ctx.message.author.id
-    if author == 488038345151217719:
-        await ctx.send(f"Доступ pmm запрещён!")
-    else:
-        await ctx.send(f"```Подключаю модуль времени...```")
-        time = datetime.now()
-        mtime = timedelta(hours=3)
-        mtime = time + mtime
-        mtime = mtime.strftime("%H:%M")
-        await ctx.send(f" ```Текущее время МСК {mtime} ```")
+   time = datetime.now()
+   mtime = timedelta(hours=3)
+   mtime = time + mtime
+   mtime = mtime.strftime("%H:%M")
+   await ctx.send(f" ```Текущее время МСК {mtime} ```")
+    
+@legacy.command(pass_context= True)
+async def Новый_период(ctx): #OK
+    await ctx.message.delete()
+    time = date.today()
+    timenext = timedelta(days = 2)
+    timenext = time + timenext
+    time = time.strftime("%d/%m")
+    timenext = timenext.strftime("%d/%m")
+    cursor.execute(f"UPDATE Legates SET datenow = ('{time}'), datenext = ('{timenext}')")
+    cursor.execute(f"UPDATE Legates SET time = Null, endtime = ('00:00')")
+    await ctx.send(f"Начало нового периода {time} - {timenext}")
+    conn.commit()
+
+@legacy.command(pass_context= True)
+async def Зашел(ctx, server, starttime):        #ok
+    time1 = datetime.strptime(starttime,"%H:%M")
+    time1 = time1.strftime("%H:%M")
+    cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
+    conn.commit()
+    await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
+
+@legacy.command(pass_context= True)
+async def Вышел(ctx, server, endtime):          #ok
+    cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+    timeinserver = cursor.fetchall()
+    time2 = datetime.strptime(endtime,"%H:%M")
+    #time2 = time2.strftime("%H:%M")
+    time3 = timeinserver[0][0]
+    time4 = datetime.strptime(time3,"%H:%M")
+    time5 = timeinserver[0][1]
+    time6 = datetime.strptime(time5,"%H:%M")
+    #time4 = time4.strftime("%H:%M")
+    timeall = time2 - time4 + time6
+    timeall = timeall.strftime("%H:%M")
+    cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+    conn.commit()
+    await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
+
+@legacy.command(pass_context= True)
+async def Дозапись(ctx, legat, endtime):            #ok
+    await ctx.message.delete()
+    cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
+    conn.commit()
+    await ctx.send(f"Дозапись Легату {legat} в размере {endtime} сделана.")
+
+@legacy.command(pass_context= True)                          
+async def Доклад(ctx):              #ok
+    one = randint(0, 50)
+    two = randint(50, 100)
+    await ctx.send(f"Подготавливаю доклад...")
+    time.sleep(1)
+    await ctx.send(f"Чтение данных {one}%...")
+    time.sleep(1)
+    await ctx.send(f"Запрос личных данных {two}%...")
+    time.sleep(1)
+    await ctx.send(f"Готово.")
+    cursor.execute("SELECT name, time, norma, datenow, datenext FROM Legates")
+    results = cursor.fetchall()
+    await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
+    f = open ("test.txt", "w")
+    for i in range (len(results)):
+        if {results[i][2]} == {results[i][1]}:
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
+        else:
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} \n \n")
+    f.close()
+    f = open ("test.txt", "r")
+    await ctx.send(f"```{f.read()}```")
     
 @cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
@@ -63,7 +137,6 @@ async def работать (ctx, user: discord.User):
 
 @cabal.command(pass_context= True)  
 async def заеби(ctx, user: discord.User):
-    #author = ctx.message.author.id
     if ctx.message.author.id == 370199534183120897:
         for i in range (100):
             await ctx.channel.purge(limit = 2)
