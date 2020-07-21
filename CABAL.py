@@ -133,6 +133,7 @@ async def Дозапись(ctx, legat, endtime):
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
+    await ctx.message.delete()
     conn = pymysql.connect(
     database = "heroku_37902c259aa0c69",
     user = "bfb248ab836452",
