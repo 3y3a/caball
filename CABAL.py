@@ -36,12 +36,7 @@ async def on_connect():
     #await channelup.send("``Подключён``")
     await cabal.change_presence( status = discord.Status.online, activity = discord.CustomActivity ("123"))
     #activity = discord.Game ("C&C"))
-    while True:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT starttime, endtime FROM Legates")
-        conn.commit()
-        cursor.close
-        time.sleep(30)  
+    
 
 @cabal.command(pass_context= True)  
 async def пни(ctx, user: discord.User):
