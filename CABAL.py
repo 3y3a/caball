@@ -15,16 +15,6 @@ from random import randint
 #import sqlite3
 import pymysql
 
-conn = pymysql.connect(
-    database = "heroku_37902c259aa0c69",
-    user = "bfb248ab836452",
-    password = "7ba0fd68",
-    host = "eu-cdbr-west-03.cleardb.net",
-    #port = "3306",
-    charset = "utf8mb4",
-    #cursorclass=pymysql.cursors.DictCursor
-)
-
 key_words = ["CABAL", "cabal", "Cabal"]
 
 cabal = commands.Bot(command_prefix= "!")
@@ -58,7 +48,15 @@ async def Время(ctx):
    await ctx.send(f" ```Текущее время МСК {mtime} ```")
     
 @cabal.command(pass_context= True)
-async def Новый_период(ctx): 
+async def Новый_период(ctx):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor = conn.cursor()
     await ctx.message.delete()
     time = date.today()
@@ -73,7 +71,15 @@ async def Новый_период(ctx):
     cursor.close
 
 @cabal.command(pass_context= True)
-async def Зашел(ctx, server, starttime):        
+async def Зашел(ctx, server, starttime):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor = conn.cursor()
     time1 = datetime.strptime(starttime,"%H:%M")
     time1 = time1.strftime("%H:%M")
@@ -83,7 +89,15 @@ async def Зашел(ctx, server, starttime):
     await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
-async def Вышел(ctx, server, endtime):    
+async def Вышел(ctx, server, endtime):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor = conn.cursor()
     cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
@@ -103,6 +117,14 @@ async def Вышел(ctx, server, endtime):
 
 @cabal.command(pass_context= True)
 async def Дозапись(ctx, legat, endtime):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor = conn.cursor()
     cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
     conn.commit()
@@ -111,6 +133,14 @@ async def Дозапись(ctx, legat, endtime):
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor = conn.cursor()
     one = randint(0, 50)
     two = randint(50, 100)
