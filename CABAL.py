@@ -157,7 +157,7 @@ async def Доклад(ctx):
     await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
     f = open ("test.txt", "w")
     for i in range (len(results)):
-        if {results[i][2]} == {results[i][1]}:
+        if {results[i][2]} == {results[i][1]} or {results[i][2]} < {results[i][1]}:
             f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
         else:
             f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} \n \n")
