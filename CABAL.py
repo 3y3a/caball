@@ -80,13 +80,22 @@ async def Зашел(ctx, server, starttime):
     #port = "3306",
     charset = "utf8mb4",
 )
-    cursor = conn.cursor()
-    time1 = datetime.strptime(starttime,"%H:%M")
-    time1 = time1.strftime("%H:%M")
-    cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
-    conn.commit()
-    cursor.close
-    await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
+    if ctx.author.id = 345253518376173570:
+        cursor = conn.cursor()
+        time1 = datetime.strptime(starttime,"%H:%M")
+        time1 = time1.strftime("%H:%M")
+        cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"С возвращением, инженер. Учёт времени запущен.")
+    else:
+        cursor = conn.cursor()
+        time1 = datetime.strptime(starttime,"%H:%M")
+        time1 = time1.strftime("%H:%M")
+        cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
 async def Вышел(ctx, server, endtime):
