@@ -191,7 +191,7 @@ async def Доклад(ctx):
     f.close()
     f = open ("test.txt", "r")
     await ctx.send(f"```{f.read()}```")
-    await ctx.send(f"{results[i][1]}")
+    #await ctx.send(f"{results[i][1]}")
     cursor.close
     
 @cabal.command(pass_context= True)
