@@ -80,7 +80,7 @@ async def Зашел(ctx, server, starttime):
     #port = "3306",
     charset = "utf8mb4",
 )
-    if ctx.author.id = 345253518376173570:
+    if ctx.author.id == 345253518376173570:
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
