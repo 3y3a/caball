@@ -124,7 +124,7 @@ async def Вышел(ctx, server, endtime):
         conn.commit()
         cursor.close
         await ctx.send(f"Ваше общее время на посту: {timeall}")
-     else:
+    else:
         cursor = conn.cursor()
         cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
         timeinserver = cursor.fetchall()
