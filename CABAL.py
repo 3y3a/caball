@@ -107,25 +107,43 @@ async def Вышел(ctx, server, endtime):
     #port = "3306",
     charset = "utf8mb4",
 )
-    cursor = conn.cursor()
-    cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
-    timeinserver = cursor.fetchall()
-    time2 = datetime.strptime(endtime,"%H:%M")
-    #time2 = time2.strftime("%H:%M")
-    time3 = timeinserver[0][0]
-    time4 = datetime.strptime(time3,"%H:%M")
-    time5 = timeinserver[0][1]
-    time6 = datetime.strptime(time5,"%H:%M")
-    #time4 = time4.strftime("%H:%M")
-    timeall = time2 - time4 + time6
-    timeall = timeall.strftime("%H:%M")
-    cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
-    conn.commit()
-    cursor.close
-    await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
+    if ctx.author.id == 345253518376173570:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+        timeinserver = cursor.fetchall()
+        time2 = datetime.strptime(endtime,"%H:%M")
+        #time2 = time2.strftime("%H:%M")
+        time3 = timeinserver[0][0]
+        time4 = datetime.strptime(time3,"%H:%M")
+        time5 = timeinserver[0][1]
+        time6 = datetime.strptime(time5,"%H:%M")
+        #time4 = time4.strftime("%H:%M")
+        timeall = time2 - time4 + time6
+        timeall = timeall.strftime("%H:%M")
+        cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"Ваше общее время на посту: {timeall}")
+     else:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+        timeinserver = cursor.fetchall()
+        time2 = datetime.strptime(endtime,"%H:%M")
+        #time2 = time2.strftime("%H:%M")
+        time3 = timeinserver[0][0]
+        time4 = datetime.strptime(time3,"%H:%M")
+        time5 = timeinserver[0][1]
+        time6 = datetime.strptime(time5,"%H:%M")
+        #time4 = time4.strftime("%H:%M")
+        timeall = time2 - time4 + time6
+        timeall = timeall.strftime("%H:%M")
+        cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
 @cabal.command(pass_context= True)
-async def Дозапись(ctx, legat, endtime):
+async def Перезапись(ctx, legat, endtime):
     conn = pymysql.connect(
     database = "heroku_37902c259aa0c69",
     user = "bfb248ab836452",
