@@ -211,18 +211,7 @@ async def заеби(ctx, user: discord.User):
     else:
         await ctx.send(f"Доступ ограничен")
 
-@cabal.event
-async def on_message (message):                                         
-    await cabal.process_commands (message)
-    mess = message.content.lower()
-    if mess in key_words:
-        #await message.delete()
-        #time.sleep (3)
-        await message.author.send(f" ```анализ упоминания...```")
-        time.sleep (4)
-        await message.author.send(f" ```{message.author.name} - здравствуйте легат, доступ разрешён .```")
-    #await message.author.send({message.author.id})
-    
+
 @cabal.command(pass_context= True)
 @commands.has_permissions(administrator= True)
 async def say(ctx, channel : discord.TextChannel, *args):
