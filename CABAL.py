@@ -195,6 +195,52 @@ async def Доклад(ctx):
     cursor.close
     
 @cabal.command(pass_context= True)
+async def Выдача_снаряжения(ctx, type, rank):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
+    cursor = conn.cursor()
+    id = ctx.author.id
+    name = ctx.author.name
+    a = 0
+    b = 0
+    cursor.execute(f"SELECT id, norma FROM Legates")
+    results = cursor.fetchall()
+    for i in range(len(results)):
+        if id == results[a][0]:
+            await ctx.send(f"{ctx.author.name} вы уже получили снаряжение. Приступайте к выполнению поставленных задачь.")
+            b = 2
+            break
+        a=a+1
+    if b == 2:
+        return
+    if int(rank) == 1:
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '04:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        conn.commit()
+        await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
+                
+                ##cursor.execute(f"UPDATE Legates SET norma = ('04:00') WHERE id = ('{ctx.author.id}')")
+    if int(rank) == 2:
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '05:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        conn.commit()
+        await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
+                
+                ##cursor.execute(f"UPDATE Legates SET norma = ('05:00') WHERE id = ('{ctx.author.id}')")
+    if int(rank) == 3:
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '06:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        conn.commit()
+        await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
+                
+                ##cursor.execute(f"UPDATE Legates SET norma = ('06:00') WHERE id = ('{ctx.author.id}')")
+    conn.commit
+
+    
+@cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
     if ctx.message.author.id == 370199534183120897:                                      
         await user.send(f"Ебошь блять!")
