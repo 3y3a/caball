@@ -239,6 +239,10 @@ async def Выдача_снаряжения(ctx, type, rank):
                 ##cursor.execute(f"UPDATE Legates SET norma = ('06:00') WHERE id = ('{ctx.author.id}')")
     conn.commit
 
+@cabal.command(pass_context= True)
+async def Text(ctx, time, legat):
+    cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE name = ('{legat}')")
+    conn.commit()
     
 @cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
