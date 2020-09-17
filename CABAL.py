@@ -168,6 +168,7 @@ async def Смена_снаряжения(ctx, time, legat):
     #port = "3306",
     charset = "utf8mb4",
 )
+    cursor = conn.cursor()
     cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE name = ('{legat}')")
     conn.commit()
     await ctx.send(f"Норма времени для Легата {legat} изменена.")
