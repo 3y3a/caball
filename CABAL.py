@@ -160,8 +160,17 @@ async def Перезапись(ctx, legat, endtime):
     
 @cabal.command(pass_context= True)
 async def Смена_снаряжения(ctx, time, legat):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
     cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE name = ('{legat}')")
     conn.commit()
+    await ctx.send(f"Норма времени для Легата {legat} изменена.")
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
