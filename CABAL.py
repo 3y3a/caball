@@ -157,6 +157,11 @@ async def Перезапись(ctx, legat, endtime):
     conn.commit()
     cursor.close
     await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+    
+@cabal.command(pass_context= True)
+async def Смена_снаряжения(ctx, time, legat):
+    cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE name = ('{legat}')")
+    conn.commit()
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
