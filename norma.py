@@ -15,7 +15,7 @@ from random import randint
 #import sqlite3
 import pymysql
 
-cabal = commands.Bot(command_prefix= "!")
+cabal = commands.Bot(command_prefix= "?")
 @cabal.event                                
 async def on_connect():                                       
     print("Module 2 status OK")
@@ -32,7 +32,7 @@ conn = pymysql.connect(
     charset = "utf8mb4",
 )
 cursor = conn.cursor()
-async def Старт(ctx):
+async def start(ctx):
     i = 0
     while i < 259210:
         time.sleep (1)
