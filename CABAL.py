@@ -297,7 +297,7 @@ async def say(ctx, channel : discord.TextChannel, *args):
 @cabal.command(pass_context= True)
 async def test(ctx):
     #channel = channel: discord.TextChannel
-    channel = отчеты-по-дежурствам
+    channel = 707987744055361556
     channel: discord.TextChannel
     await channel.send(f"123")
 
