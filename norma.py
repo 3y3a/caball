@@ -9,7 +9,6 @@ from datetime import date
 from time import sleep
 import os
 import requests
-from PIL import Image, ImageFont, ImageDraw
 import io
 import time
 from random import randint
@@ -39,6 +38,7 @@ async def Старт(ctx):
     while i < 259210:
         time.sleep (1)
         i = i+1
+        await ctx.send(i)
         if i == 259200 :
             tim = date.today()
             timenext = timedelta(days = 2)
