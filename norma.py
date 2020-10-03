@@ -41,6 +41,14 @@ async def start(ctx):
         i = i+1
         await ctx.send(f"{i}")
         if i == 5 :
+            conn = pymysql.connect(
+            database = "heroku_37902c259aa0c69",
+            user = "bfb248ab836452",
+            password = "7ba0fd68",
+            host = "eu-cdbr-west-03.cleardb.net",
+            #port = "3306",
+            charset = "utf8mb4",
+            )
             tim = date.today()
             timenext = timedelta(days = 2)
             timenext = tim + timenext
