@@ -37,7 +37,7 @@ async def Старт(ctx):
     while i < 259210:
         time.sleep (1)
         i = i+1
-        await ctx.send(i)
+        await ctx.send(f"{i}")
         if i == 259200 :
             tim = date.today()
             timenext = timedelta(days = 2)
