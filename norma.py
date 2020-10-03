@@ -49,7 +49,7 @@ async def start(ctx):
             cursor.execute(f"UPDATE Legates SET datenow = ('{tim}'), datenext = ('{timenext}')")
             cursor.execute(f"UPDATE Legates SET tim = ('00:00'), endtime = ('00:00')")
             i = 0
-            cursor.execute("SELECT name, time, norma, datenow, datenext FROM Legates")
+            cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
             results = cursor.fetchall()
             await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
             f = open ("test.txt", "w")
