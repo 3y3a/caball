@@ -36,9 +36,9 @@ cursor = conn.cursor()
 @cabal.command(pass_context= True)
 async def start(ctx):
     i = 0
-    while i < 15:
-        time.sleep (1)
+    while i < 30:
         i = i+1
+        time.sleep (1)
         await ctx.send(f"{i}")
         if i == 5 :
             conn = pymysql.connect(
@@ -56,7 +56,6 @@ async def start(ctx):
             timenext = timenext.strftime("%d/%m")
             cursor.execute(f"UPDATE Legates SET datenow = ('{tim}'), datenext = ('{timenext}')")
             cursor.execute(f"UPDATE Legates SET tim = ('00:00'), endtime = ('00:00')")
-            i = 0
             cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
             results = cursor.fetchall()
             await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
@@ -70,6 +69,7 @@ async def start(ctx):
             f = open ("test.txt", "r")
             await ctx.send(f"```{f.read()}```")
             await ctx.send(f"ok")
+            i = 0
             cursor.close
         
 token = os.environ.get("BOT_TOKEN")
