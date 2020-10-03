@@ -21,7 +21,7 @@ cabal = commands.Bot(command_prefix= "!")
 
 @cabal.event                                
 async def on_connect():                                       
-    print("Welcome back Commander")
+    print("Module 1 status OK")
     #channelup = cabal.get_channel(695286021176426536)
     #await channelup.send("``Подключён``")
     await cabal.change_presence( status = discord.Status.online, activity = discord.CustomActivity ("123"))
@@ -297,7 +297,7 @@ async def say(ctx, channel : discord.TextChannel, *args):
 @cabal.command(pass_context= True)
 async def test(ctx):
     #channel = channel: discord.TextChannel
-    channel = test-rights
+    channel = отчеты-по-дежурствам
     channel: discord.TextChannel
     await channel.send(f"123")
 
