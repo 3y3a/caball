@@ -1,2 +1,2 @@
 worker: python CABAL.py
-web: python norma.py
+work: python norma.py
