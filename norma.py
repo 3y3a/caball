@@ -13,7 +13,6 @@ import io
 import time
 from random import randint
 #import sqlite3
-from playsound import playsound
 import pymysql
 
 cabal = commands.Bot(command_prefix= "!")
