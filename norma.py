@@ -32,6 +32,8 @@ conn = pymysql.connect(
     charset = "utf8mb4",
 )
 cursor = conn.cursor()
+
+@cabal.command(pass_context= True)
 async def start(ctx):
     i = 0
     while i < 259210:
