@@ -36,11 +36,11 @@ cursor = conn.cursor()
 @cabal.command(pass_context= True)
 async def start(ctx):
     i = 0
-    while i < 30:
+    while i < 259250:
         i = i+1
         time.sleep (1)
         await ctx.send(f"{i}")
-        if i == 5 :
+        if i == 259200 :
             conn = pymysql.connect(
             database = "heroku_37902c259aa0c69",
             user = "bfb248ab836452",
@@ -68,7 +68,6 @@ async def start(ctx):
             f.close()
             f = open ("test.txt", "r")
             await ctx.send(f"```{f.read()}```")
-            await ctx.send(f"ok")
             i = 0
             cursor.close
         
