@@ -61,4 +61,5 @@ async def Старт(ctx):
             await ctx.send(f"```{f.read()}```")
             cursor.close
         
-cabal.run( token )
+token = os.environ.get("BOT_TOKEN")
+cabal.run(str(token))
