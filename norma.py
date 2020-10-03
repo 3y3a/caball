@@ -36,11 +36,11 @@ cursor = conn.cursor()
 @cabal.command(pass_context= True)
 async def start(ctx):
     i = 0
-    while i < 259210:
+    while i < 15:
         time.sleep (1)
         i = i+1
         await ctx.send(f"{i}")
-        if i == 259200 :
+        if i == 5 :
             tim = date.today()
             timenext = timedelta(days = 2)
             timenext = tim + timenext
@@ -61,6 +61,7 @@ async def start(ctx):
             f.close()
             f = open ("test.txt", "r")
             await ctx.send(f"```{f.read()}```")
+            await ctx.send(f"ok")
             cursor.close
         
 token = os.environ.get("BOT_TOKEN")
