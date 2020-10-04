@@ -37,7 +37,6 @@ cursor = conn.cursor()
 async def start(ctx):
     i = 0
     while i < 259250:
-        i = i+1
         time.sleep (1)
         await ctx.send(f"{i}")
         if i == 259200 :
