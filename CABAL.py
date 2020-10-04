@@ -121,7 +121,7 @@ async def Вышел(ctx, server, endtime):
     await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
     channel = discord.utils.get(ctx.guild.channels, id=707472735491588108)
-    await channel.purge(limit = 2)
+    await channel.purge(limit = 1)
     
     cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
     results = cursor.fetchall()
