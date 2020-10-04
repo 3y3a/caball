@@ -107,7 +107,7 @@ async def Вышел(ctx, server, endtime):
     #port = "3306",
     charset = "utf8mb4",
     )
-    cursor = con.cursor()
+    cursor = conn.cursor()
     cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
     time2 = datetime.strptime(endtime,"%H:%M")
