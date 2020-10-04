@@ -38,7 +38,7 @@ async def start(ctx):
     i = 0
     while i < 259250:
         time.sleep (1)
-        await ctx.send(f"{i}")
+        i = i + 1
         if i == 259200 :
             conn = pymysql.connect(
             database = "heroku_37902c259aa0c69",
