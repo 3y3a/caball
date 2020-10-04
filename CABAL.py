@@ -147,7 +147,7 @@ async def Перезапись(ctx, legat, endtime):
     charset = "utf8mb4",
 )
     cursor = conn.cursor()
-    cursor.execute(f"UPDATE Legates SET time = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
+    cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
     conn.commit()
     cursor.close
     await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
@@ -188,7 +188,7 @@ async def Доклад(ctx):
     #await ctx.send(f"Запрос личных данных {two}%...")
     #time.sleep(1)
     #await ctx.send(f"Готово.")
-    cursor.execute("SELECT name, time, norma, datenow, datenext FROM Legates")
+    cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
     results = cursor.fetchall()
     await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
     f = open ("test.txt", "w")
@@ -247,11 +247,6 @@ async def Выдача_снаряжения(ctx, type, rank):
                 
                 ##cursor.execute(f"UPDATE Legates SET norma = ('06:00') WHERE id = ('{ctx.author.id}')")
     conn.commit
-
-@cabal.command(pass_context= True)
-async def Text(ctx, time, legat):
-    cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE name = ('{legat}')")
-    conn.commit()
     
 @cabal.command(pass_context= True)
 async def работать (ctx, user: discord.User):   
@@ -288,12 +283,6 @@ async def say(ctx, channel : discord.TextChannel, *args):
     else:
         await ctx.send(f"Доступ запрещён")
 
-@cabal.command(pass_context= True)
-async def test(ctx):
-    #channel = channel: discord.TextChannel
-    channel = 707987744055361556
-    channel: discord.TextChannel
-    await channel.send(f"123")
 
 token = os.environ.get("BOT_TOKEN")
 cabal.run(str(token))
