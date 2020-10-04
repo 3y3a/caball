@@ -107,6 +107,7 @@ async def Вышел(ctx, server, endtime):
     #port = "3306",
     charset = "utf8mb4",
     )
+    cursor = con.cursor()
     cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
     timeinserver = cursor.fetchall()
     time2 = datetime.strptime(endtime,"%H:%M")
@@ -119,7 +120,7 @@ async def Вышел(ctx, server, endtime):
     cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
     await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
-    channel = discord.utils.get(ctx.guild.channels, id=707987744055361556)
+    channel = discord.utils.get(ctx.guild.channels, id=707472735491588108)
     await channel.purge(limit = 2)
     
     cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
