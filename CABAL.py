@@ -106,41 +106,34 @@ async def Вышел(ctx, server, endtime):
     host = "eu-cdbr-west-03.cleardb.net",
     #port = "3306",
     charset = "utf8mb4",
-)
-    if ctx.author.id == 345253518376173570:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
-        timeinserver = cursor.fetchall()
-        time2 = datetime.strptime(endtime,"%H:%M")
-        #time2 = time2.strftime("%H:%M")
-        time3 = timeinserver[0][0]
-        time4 = datetime.strptime(time3,"%H:%M")
-        time5 = timeinserver[0][1]
-        time6 = datetime.strptime(time5,"%H:%M")
-        #time4 = time4.strftime("%H:%M")
-        timeall = time2 - time4 + time6
-        timeall = timeall.strftime("%H:%M")
-        cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
-        conn.commit()
-        cursor.close
-        await ctx.send(f"Ваше общее время на посту: {timeall}")
-    else:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
-        timeinserver = cursor.fetchall()
-        time2 = datetime.strptime(endtime,"%H:%M")
-        #time2 = time2.strftime("%H:%M")
-        time3 = timeinserver[0][0]
-        time4 = datetime.strptime(time3,"%H:%M")
-        time5 = timeinserver[0][1]
-        time6 = datetime.strptime(time5,"%H:%M")
-        #time4 = time4.strftime("%H:%M")
-        timeall = time2 - time4 + time6
-        timeall = timeall.strftime("%H:%M")
-        cursor.execute(f"UPDATE Legates SET time = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
-        conn.commit()
-        cursor.close
-        await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
+    )
+    cursor.execute(f"SELECT starttime, endtime FROM Legates WHERE id = ('{ctx.author.id}')  ")
+    timeinserver = cursor.fetchall()
+    time2 = datetime.strptime(endtime,"%H:%M")
+    time3 = timeinserver[0][0]
+    time4 = datetime.strptime(time3,"%H:%M")
+    time5 = timeinserver[0][1]
+    time6 = datetime.strptime(time5,"%H:%M")
+    timeall = time2 - time4 + time6
+    timeall = timeall.strftime("%H:%M")
+    cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+    await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
+
+    channel = discord.utils.get(ctx.guild.channels, id=707987744055361556)
+    await channel.purge(limit = 2)
+    
+    cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
+    results = cursor.fetchall()
+    f = open ("test.txt", "w")
+    for i in range (len(results)):
+        if str(results[i][2]) <= str(results[i][1]):
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
+        else:
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} \n \n")
+    f.close()
+    f = open ("test.txt", "r")
+    await channel.send(f"```{f.read()}```")
+    conn.commit()
 
 @cabal.command(pass_context= True)
 async def Перезапись(ctx, legat, endtime):
