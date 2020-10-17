@@ -255,6 +255,10 @@ async def работать (ctx, user: discord.User):
     else:
         await ctx.send(f"Доступ ограничен")
     
+@cabal.command(pass_context= True)
+async def маска(ctx, member: discord.Member):
+    await member.edit(nick=(f"{member} в маске"))
+    await ctx.send(f"{member.mention} одел маску!")
 
 @cabal.command(pass_context= True)  
 async def заеби(ctx, user: discord.User):
