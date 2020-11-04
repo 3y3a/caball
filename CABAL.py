@@ -80,7 +80,7 @@ async def Зашел(ctx, server, starttime):
     #port = "3306",
     charset = "utf8mb4",
 )
-    if ctx.author.id == 345253518376173570:         #zuza
+    if ctx.author.id == 345253518376173570:       #zuza
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
@@ -88,7 +88,7 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением, инженер. Учёт времени запущен.")
-    elif ctx.author.id == 445588020230356993:          #latikoma  
+    if ctx.author.id == 445588020230356993:          #latikoma  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
@@ -96,7 +96,7 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением лейтенант Латикома, удачно провести время. Учёт времени запущен.")
-    elif ctx.author.id == 445588020230356993:          #qwenty  
+    if ctx.author.id == 445588020230356993:          #qwenty  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
