@@ -88,7 +88,7 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением, инженер. Учёт времени запущен.")
-    if ctx.author.id == 445588020230356993:          #latikoma  
+    elif ctx.author.id == 445588020230356993:          #latikoma  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
@@ -96,7 +96,7 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением лейтенант Латикома, удачно провести время. Учёт времени запущен.")
-    if ctx.author.id == 445588020230356993:          #qwenty  
+    elif ctx.author.id == 401377532689252355:      #qwenty  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
