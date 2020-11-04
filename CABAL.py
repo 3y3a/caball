@@ -87,7 +87,7 @@ async def Зашел(ctx, server, starttime):
         cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"С возвращением, инженер. Учёт времени запущен.")
+        await ctx.send(f"С возвращением, Создатель. Постараюсь не разрушать код реальности раньше времени. Учёт времени запущен.")
     elif ctx.author.id == 445588020230356993:          #latikoma  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
@@ -103,7 +103,7 @@ async def Зашел(ctx, server, starttime):
         cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"С возвращением, доктор Келлер. Новые эксперименты ждут на ('{server}') посту. Учёт времени запущен.")
+        await ctx.send(f"С возвращением, доктор Келлер. Новые эксперименты ждут на {server} посту. Учёт времени запущен.")
     else:
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
@@ -134,7 +134,14 @@ async def Вышел(ctx, server, endtime):
     timeall = time2 - time4 + time6
     timeall = timeall.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
-    await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
+    if ctx.author.id == 345253518376173570:#zuza
+        await ctx.send(f"Досвидания. Общее время пребывания в реальности №{server} - {timeall}.")
+    elif ctx.author.id == 445588020230356993:          #latikoma
+        await ctx.send(f"Жду вас вновь, лейтенант Латикома. Общее время на посту {timeall}.")
+    elif ctx.author.id == 401377532689252355:      #qwenty  
+        await ctx.send(f"Удачное времяпровождение!. Текущее время n + {timeall}.")
+    else:
+        await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
     channel = discord.utils.get(ctx.guild.channels, id=707472735491588108)
     await channel.purge(limit = 1)
