@@ -229,18 +229,22 @@ async def Выдача_снаряжения(ctx, type, rank):
     if b == 2:
         return
     if int(rank) == 1:
-        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '04:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '03:00', '00:00', {4}, {5}, '00:00', '00:00')")
         conn.commit()
         await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
                 
                 ##cursor.execute(f"UPDATE Legates SET norma = ('04:00') WHERE id = ('{ctx.author.id}')")
     if int(rank) == 2:
-        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '05:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '04:00', '00:00', {4}, {5}, '00:00', '00:00')")
         conn.commit()
         await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
                 
                 ##cursor.execute(f"UPDATE Legates SET norma = ('05:00') WHERE id = ('{ctx.author.id}')")
     if int(rank) == 3:
+        cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '05:00', '00:00', {4}, {5}, '00:00', '00:00')")
+        conn.commit()
+        await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
+    if int(rank) == 4:
         cursor.execute(f"INSERT INTO Legates VALUES ({id}, '{name}', '06:00', '00:00', {4}, {5}, '00:00', '00:00')")
         conn.commit()
         await ctx.send(f"{ctx.author.name} снаряжение выдано. Удачи, Легат.")
