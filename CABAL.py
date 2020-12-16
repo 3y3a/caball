@@ -104,6 +104,8 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением, доктор Келлер. Новые эксперименты ждут на {server} посту. Учёт времени запущен.")
+    elif ctx.author.id == 488038345151217719:
+        await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
