@@ -104,7 +104,7 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением, доктор Келлер. Новые эксперименты ждут на {server} посту. Учёт времени запущен.")
-    elif ctx.author.id == 488038345151217719:
+    elif ctx.author.id == 488038345151217719:   #pmm
         await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
         cursor = conn.cursor()
@@ -142,6 +142,8 @@ async def Вышел(ctx, server, endtime):
         await ctx.send(f"Жду вас вновь, лейтенант Латикома. Общее время на посту {timeall}.")
     elif ctx.author.id == 401377532689252355:      #qwenty  
         await ctx.send(f"Удачное времяпровождение!. Текущее время n + {timeall}.")
+    elif ctx.author.id == 488038345151217719:   #pmm
+        await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
         await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
