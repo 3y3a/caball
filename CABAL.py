@@ -88,14 +88,14 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением, Создатель. Постараюсь не разрушать код реальности раньше времени. Учёт времени запущен.")
-    elif ctx.author.id == 445588020230356993:          #latikoma  
+    elif ctx.author.id == 364491118005714966:          #deriator  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
         cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"С возвращением лейтенант Латикома, удачно провести время. Учёт времени запущен.")
+        await ctx.send(f"С возвращением лейтенант, удачно провести время. Учёт запущен.")
     elif ctx.author.id == 401377532689252355:      #qwenty  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
