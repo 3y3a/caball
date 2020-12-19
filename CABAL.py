@@ -174,7 +174,7 @@ async def Перезапись(ctx, legat, endtime):
     charset = "utf8mb4",
 )
     cursor = conn.cursor()
-    cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE name = ('{legat}')")
+    cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
     conn.commit()
     cursor.close
     await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
