@@ -96,14 +96,14 @@ async def Зашел(ctx, server, starttime):
         conn.commit()
         cursor.close
         await ctx.send(f"С возвращением лейтенант, удачно провести время. Учёт запущен.")
-    elif ctx.author.id == 401377532689252355:      #qwenty  
+    elif ctx.author.id == 370199534183120897:          #fanta  
         cursor = conn.cursor()
         time1 = datetime.strptime(starttime,"%H:%M")
         time1 = time1.strftime("%H:%M")
         cursor.execute(f"UPDATE Legates SET starttime = ('{time1}') WHERE id = ('{ctx.author.id}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"С возвращением, доктор Келлер. Новые эксперименты ждут на {server} посту. Учёт времени запущен.")
+        await ctx.send(f"Рад вашему возвращению, нечасто я вас вижу. Учёт запущен.")
     elif ctx.author.id == 488038345151217719:   #pmm
         await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
@@ -138,10 +138,10 @@ async def Вышел(ctx, server, endtime):
     cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
     if ctx.author.id == 345253518376173570:#zuza
         await ctx.send(f"Досвидания. Общее время пребывания в реальности №{server} - {timeall}.")
-    elif ctx.author.id == 445588020230356993:          #latikoma
-        await ctx.send(f"Жду вас вновь, лейтенант Латикома. Общее время на посту {timeall}.")
-    elif ctx.author.id == 401377532689252355:      #qwenty  
-        await ctx.send(f"Удачное времяпровождение!. Текущее время n + {timeall}.")
+    elif ctx.author.id == 364491118005714966:          #deriator
+        await ctx.send(f"Жду вас вновь, лейтенант. Общее время на посту {timeall}.")
+    elif ctx.author.id == 370199534183120897:          #fanta
+        await ctx.send(f"Жду вас вновь, командир. Общее время на посту {timeall}.")
     elif ctx.author.id == 488038345151217719:   #pmm
         await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
@@ -173,12 +173,27 @@ async def Перезапись(ctx, legat, endtime):
     #port = "3306",
     charset = "utf8mb4",
 )
-    cursor = conn.cursor()
-    cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
-    conn.commit()
-    cursor.close
-    await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
-    
+    if ctx.author.id == 345253518376173570:#zuza
+        cursor = conn.cursor()
+        cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+    elif ctx.author.id == 445588020230356993:          #latikoma
+        cursor = conn.cursor()
+        cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+    elif ctx.author.id == 370199534183120897:          #fanta
+        cursor = conn.cursor()
+        cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
+        conn.commit()
+        cursor.close
+        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+    else:
+        await ctx.send(f"Отказ. Рапорт об несанкционированном доступе сформирован и отправлен, ждите.")
+
 @cabal.command(pass_context= True)
 async def Смена_снаряжения(ctx, time, legat):
     conn = pymysql.connect(
