@@ -262,7 +262,7 @@ async def Выдача_снаряжения(ctx, type, rank):
     results = cursor.fetchall()
     for i in range(len(results)):
         if id == results[a][0]:
-            await ctx.send(f"{ctx.author.name} вы уже получили снаряжение. Приступайте к выполнению поставленных задачь.")
+            await ctx.send(f"{ctx.author.name} вы уже получили снаряжение. Приступайте к выполнению поставленных задач.")
             b = 2
             break
         a=a+1
