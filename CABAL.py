@@ -136,19 +136,17 @@ async def Вышел(ctx, server, endtime):
     timeall = time2 - time4 + time6
     timeall = timeall.strftime("%H:%M")
     cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
-    if ctx.author.id == 345253518376173570:#zuza
+    if ctx.author.id == 345253518376173570:             #zuza
         await ctx.send(f"Досвидания. Общее время пребывания в реальности №{server} - {timeall}.")
     elif ctx.author.id == 364491118005714966:          #deriator
         await ctx.send(f"Жду вас вновь, лейтенант. Общее время на посту {timeall}.")
     elif ctx.author.id == 370199534183120897:          #fanta
         await ctx.send(f"Жду вас вновь, командир. Общее время на посту {timeall}.")
-    elif ctx.author.id == 488038345151217719:   #pmm
-        await ctx.send(f"Отказ услуги. Рапорт об наказании N213")
     else:
         await ctx.send(f"{ctx.author.name} общее время на посту: {timeall}")
 
-    channel = discord.utils.get(ctx.guild.channels, id=707472735491588108)
-    await channel.purge(limit = 1)
+    #channel = discord.utils.get(ctx.guild.channels, id=707472735491588108)
+    #await channel.purge(limit = 1)
     
     cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
     results = cursor.fetchall()
