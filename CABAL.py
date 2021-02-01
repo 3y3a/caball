@@ -60,7 +60,7 @@ async def Новый_период(ctx):
     cursor = conn.cursor()
     await ctx.message.delete()
     time = date.today()
-    timenext = timedelta(days = 2)
+    timenext = timedelta(days = 6)
     timenext = time + timenext
     time = time.strftime("%d/%m")
     timenext = timenext.strftime("%d/%m")
