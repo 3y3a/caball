@@ -250,9 +250,9 @@ async def Доклад(ctx):
     f = open ("test.txt", "w")
     for i in range (len(results)):
         if str(results[i][2]) <= str(results[i][1]):
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) / ")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) / ивенты ")
         else:
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} / ")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} / ивенты ")
         if str(results[i][6]) <= str(results[i][5]):
             f.write(f"{results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
         else:
