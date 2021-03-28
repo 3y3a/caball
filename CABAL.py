@@ -82,6 +82,8 @@ async def Ивент(ctx, event_new):
 )
     cursor = conn.cursor()
     cursor.execute(f"UPDATE Legates SET event = ('{event_new}') WHERE id = ('{ctx.author.id}')")
+    conn.commit()
+    cursor.close
     await ctx.send(f"Количество ивентов за данную сессию учтено")
         
 @cabal.command(pass_context= True)
