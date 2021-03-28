@@ -164,7 +164,7 @@ async def Вышел(ctx, server, endtime, events):
     channel = discord.utils.get(ctx.guild.channels, id=801607997229891584)
     await channel.purge(limit = 1)
     
-    cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
+    cursor.execute("SELECT name, tim, norma, datenow, datenext, event, events_all FROM Legates")
     results = cursor.fetchall()
     f = open ("test.txt", "w")
     for i in range (len(results)):
