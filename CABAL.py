@@ -85,6 +85,22 @@ async def Ивент(ctx, event_new):
     conn.commit()
     cursor.close
     await ctx.send(f"Количество ивентов за данную сессию учтено")
+    cursor.execute("SELECT name, tim, norma, datenow, datenext, event, events_all FROM Legates")
+    results = cursor.fetchall()
+    f = open ("test.txt", "w")
+    for i in range (len(results)):
+        if str(results[i][2]) <= str(results[i][1]):
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) / ивенты ")
+        else:
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} / ивенты ")
+        if str(results[i][6]) <= str(results[i][5]):
+            f.write(f"{results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
+        else:
+            f.write(f"{results[i][5]} / {results[i][6]} \n \n")
+    f.close()
+    f = open ("test.txt", "r")
+    await channel.send(f"```{f.read()}```")
+    conn.commit()
         
 @cabal.command(pass_context= True)
 async def Зашел(ctx, server, starttime):
@@ -132,7 +148,7 @@ async def Зашел(ctx, server, starttime):
         await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
-async def Вышел(ctx, server, endtime, events):
+async def Вышел(ctx, server, endtime):
     conn = pymysql.connect(
     database = "heroku_37902c259aa0c69",
     user = "bfb248ab836452",
@@ -151,7 +167,7 @@ async def Вышел(ctx, server, endtime, events):
     time6 = datetime.strptime(time5,"%H:%M")
     timeall = time2 - time4 + time6
     timeall = timeall.strftime("%H:%M")
-    cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}'), event = ('{events}') WHERE id = ('{ctx.author.id}')")
+    cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
     if ctx.author.id == 345253518376173570:             #zuza
         await ctx.send(f"Досвидания. Общее время пребывания в реальности №{server} - {timeall}.")
     elif ctx.author.id == 364491118005714966:          #deriator
