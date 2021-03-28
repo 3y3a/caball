@@ -235,8 +235,8 @@ async def Доклад(ctx):
     charset = "utf8mb4",
 )
     cursor = conn.cursor()
-    one = randint(0, 50)
-    two = randint(50, 100)
+    #one = randint(0, 50)
+    #two = randint(50, 100)
     #await ctx.send(f"Подготавливаю доклад...")
     #time.sleep(1)
     #await ctx.send(f"Чтение данных {one}%...")
@@ -244,15 +244,15 @@ async def Доклад(ctx):
     #await ctx.send(f"Запрос личных данных {two}%...")
     #time.sleep(1)
     #await ctx.send(f"Готово.")
-    cursor.execute("SELECT name, tim, norma, datenow, datenext FROM Legates")
+    cursor.execute("SELECT name, tim, norma, datenow, datenext, event, events_all FROM Legates")
     results = cursor.fetchall()
     await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
     f = open ("test.txt", "w")
     for i in range (len(results)):
-        if str(results[i][2]) <= str(results[i][1]):
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
+        if str(results[i][2]) <= str(results[i][1]) and (results[i][5]) <= str(results[i][6]):
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} {results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
         else:
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} \n \n")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} {results[i][5]} / {results[i][6]} \n \n")
     f.close()
     f = open ("test.txt", "r")
     await ctx.send(f"```{f.read()}```")
