@@ -249,10 +249,14 @@ async def Доклад(ctx):
     await ctx.send(f"***Период: {results[0][3]} - {results[0][4]}***")
     f = open ("test.txt", "w")
     for i in range (len(results)):
-        if str(results[i][2]) <= str(results[i][1]) and str(results[i][5]) <= str(results[i][6]):
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} {results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
+        if str(results[i][2]) <= str(results[i][1]):
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
         else:
-            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} {results[i][5]} / {results[i][6]} \n \n")
+            f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]}  \n \n")
+        if str(results[i][5]) <= str(results[i][6]):
+            f.write(f"{results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
+        else:
+            f.write(f"{results[i][5]} / {results[i][6]} \n \n")
     f.close()
     f = open ("test.txt", "r")
     await ctx.send(f"```{f.read()}```")
