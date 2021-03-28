@@ -132,7 +132,7 @@ async def Зашел(ctx, server, starttime):
         await ctx.send(f"Запуск учёта времени на посту для {ctx.author.name}.")
 
 @cabal.command(pass_context= True)
-async def Вышел(ctx, server, endtime):
+async def Вышел(ctx, server, endtime, events):
     conn = pymysql.connect(
     database = "heroku_37902c259aa0c69",
     user = "bfb248ab836452",
@@ -151,7 +151,7 @@ async def Вышел(ctx, server, endtime):
     time6 = datetime.strptime(time5,"%H:%M")
     timeall = time2 - time4 + time6
     timeall = timeall.strftime("%H:%M")
-    cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}') WHERE id = ('{ctx.author.id}')")
+    cursor.execute(f"UPDATE Legates SET tim = ('{timeall}'), endtime = ('{timeall}'), event = ('{events}') WHERE id = ('{ctx.author.id}')")
     if ctx.author.id == 345253518376173570:             #zuza
         await ctx.send(f"Досвидания. Общее время пребывания в реальности №{server} - {timeall}.")
     elif ctx.author.id == 364491118005714966:          #deriator
