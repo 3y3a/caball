@@ -253,7 +253,7 @@ async def Доклад(ctx):
             f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]} (норма выполнена) \n \n")
         else:
             f.write(f"{results[i][0]} - {results[i][1]} / {results[i][2]}  \n \n")
-        if str(results[i][5]) <= str(results[i][6]):
+        if str(results[i][6]) <= str(results[i][5]):
             f.write(f"{results[i][5]} / {results[i][6]} (норма выполнена) \n \n")
         else:
             f.write(f"{results[i][5]} / {results[i][6]} \n \n")
