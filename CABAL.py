@@ -71,6 +71,23 @@ async def Новый_период(ctx):
     cursor.close
 
 @cabal.command(pass_context= True)
+async def Ивент(ctx, event_new):
+    conn = pymysql.connect(
+    database = "heroku_37902c259aa0c69",
+    user = "bfb248ab836452",
+    password = "7ba0fd68",
+    host = "eu-cdbr-west-03.cleardb.net",
+    #port = "3306",
+    charset = "utf8mb4",
+)
+    cursor = conn.cursor()
+    cursor.execute("SELECT events FROM Legates WHERE id = ('{ctx.author.id}')")
+    event_old = cursor.fetchall()
+    events = event_old + event_new
+    cursor.execute(f"UPDATE Legates SET events = ('{events}') WHERE id = ('{ctx.author.id}')")
+    await ctx.send(f"Количество ивентов учтено")
+        
+@cabal.command(pass_context= True)
 async def Зашел(ctx, server, starttime):
     conn = pymysql.connect(
     database = "heroku_37902c259aa0c69",
@@ -176,19 +193,19 @@ async def Перезапись(ctx, legat, endtime):
         cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+        await ctx.send(f"Изменения времени для {legat} в размере {endtime} учтены.")
     elif ctx.author.id == 445588020230356993:          #latikoma
         cursor = conn.cursor()
         cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+        await ctx.send(f"Изменения времени для {legat} в размере {endtime} учтены.")
     elif ctx.author.id == 370199534183120897:          #fanta
         cursor = conn.cursor()
         cursor.execute(f"UPDATE Legates SET tim = ('{endtime}'), endtime = ('{endtime}') WHERE id = ('{legat}')")
         conn.commit()
         cursor.close
-        await ctx.send(f"Изменения времени для Легата {legat} в размере {endtime} учтены.")
+        await ctx.send(f"Изменения времени для {legat} в размере {endtime} учтены.")
     else:
         await ctx.send(f"Отказ. Рапорт об несанкционированном доступе сформирован и отправлен, ждите.")
 
@@ -205,7 +222,7 @@ async def Смена_снаряжения(ctx, time, legat):
     cursor = conn.cursor()
     cursor.execute(f"UPDATE Legates SET norma = ('{time}') WHERE id = ('{legat}')")
     conn.commit()
-    await ctx.send(f"Норма времени для Легата {legat} изменена.")
+    await ctx.send(f"Норма времени для {legat} изменена.")
 
 @cabal.command(pass_context= True)                          
 async def Доклад(ctx):
